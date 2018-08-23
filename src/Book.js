@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 
 class Book extends Component {
 	render() {
+		console.log('Props', this.props)
 		return (
 			<div className="book">
             	<div className="book-top">
@@ -16,8 +17,12 @@ class Book extends Component {
                             </select>
                         </div>
                     </div>
-            	<div className="book-title">To Kill a Mockingbird</div>
-            	<div className="book-authors">Harper Lee</div>
+            	<div className="book-title">
+            		{this.props.book.title}
+            	</div>
+            	<div className="book-authors">
+            		{this.props.book.authors}
+            	</div>
             </div>
 		)
 
