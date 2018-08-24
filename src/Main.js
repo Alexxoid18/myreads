@@ -4,7 +4,7 @@ import Search from './Search'
 
 class Main extends Component {
   render() {
-  // console.log('Props', this.props)
+  console.log('Props', this.props)
 
       return (
       <div className="list-books">
@@ -22,7 +22,9 @@ class Main extends Component {
                         .map(book => (
                           <li key={book.id}>
                             <Book
+                              
                               book={book}
+                              onChangeShelf={this.props.onChangeShelf}
                             />
                           </li>
                         ))
@@ -41,7 +43,9 @@ class Main extends Component {
                         .map(book => (
                           <li key={book.id}>
                             <Book
+                              
                               book={book}
+                              onChangeShelf={this.props.onChangeShelf}
                             />
                           </li>
                         ))
@@ -60,7 +64,9 @@ class Main extends Component {
                         .map(book => (
                           <li key={book.id}>
                             <Book
+                             
                               book={book}
+                              onChangeShelf={this.props.onChangeShelf}
                             />
                           </li>
                         ))

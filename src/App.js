@@ -10,27 +10,38 @@ class BooksApp extends Component {
 
   state = {
     showSearchPage: true,
-    books: [] 
+    books: []
+
   }
+    
+
 
   componentDidMount() {
     BooksAPI.getAll().then((books) => {
       this.setState({ books: books })
-    })
+    });
+
   }
-
- /* changeShelf = () => {
-      this.setState(() => ({
   
-      }))
+  changeShelf = (book, shelf) => {
+    book.shelf = shelf
+    BooksAPI.update(book, shelf).then(() => {
+      this.setState({ books: this.state.books
+      .filter(item => item.id !== book.id)
+      .concat([book])})
     }
+    )
+  }
+   
 
+ 
+/*
     handleChange = (event) => {
       this.setState({shelf: event.target.value})
     }
-
+*/
    
- */
+ 
 
   render() {
    // console.log(this.state.books)
@@ -38,6 +49,7 @@ class BooksApp extends Component {
       <div className="app">
         <Main  
           books = {this.state.books} 
+          onChangeShelf = {this.changeShelf}
         />
       </div>
            
