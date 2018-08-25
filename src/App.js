@@ -10,7 +10,8 @@ class BooksApp extends Component {
 
   state = {
     showSearchPage: true,
-    books: []
+    books: [],
+    query: {}
 
   }
     
@@ -32,6 +33,11 @@ class BooksApp extends Component {
     }
     )
   }
+
+  handleChange = (event) => {
+  	this.setState({query: event.target.value})
+  }
+
    
 
  
@@ -50,6 +56,11 @@ class BooksApp extends Component {
         <Main  
           books = {this.state.books} 
           onChangeShelf = {this.changeShelf}
+
+        />
+        <Search
+        	searchQuery = {this.state.query}
+        	onChange={this.handleChange}
         />
       </div>
            
