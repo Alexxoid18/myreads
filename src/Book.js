@@ -5,11 +5,18 @@ class Book extends Component {
 
   	
 	render() {
-		//console.log('Props', this.props)
+        // Correct display of books without thumbnails in search
+        let hasThumbnail = this.props.book.imageLinks;
+        if (hasThumbnail) {
+            hasThumbnail = this.props.book.imageLinks.thumbnail;
+        }
+        else {
+           hasThumbnail = '' ;
+        }
 		return (
 			<div className="book">
             	<div className="book-top">
-                    <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${this.props.book.imageLinks.thumbnail})` }}></div>
+                    <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${hasThumbnail})` }}></div>
                         <div className="book-shelf-changer">
                             <select  onChange={(e) => this.props.onChangeShelf(this.props.book, e.target.value)} value={this.props.book.shelf ? this.props.book.shelf : 'none'} >
                                 <option value="move" disabled>Move to...</option>

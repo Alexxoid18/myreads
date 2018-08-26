@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Route } from 'react-router-dom'
+import escapeRegExp from 'escape-string-regexp'
 import * as BooksAPI from './BooksAPI'
 import './App.css'
 import Book from './Book'
@@ -11,20 +12,20 @@ class BooksApp extends Component {
 
   state = {
     books: [],
-    query: {}
-
-  }
+    query: '',
+    searchedBooks: []
+}
     
 
 
-  componentDidMount() {
+componentDidMount() {
     BooksAPI.getAll().then((books) => {
       this.setState({ books: books })
-    });
+    })
 
-  }
+}
   
-  changeShelf = (book, shelf) => {
+changeShelf = (book, shelf) => {
     book.shelf = shelf
     BooksAPI.update(book, shelf).then(() => {
       this.setState({ books: this.state.books
@@ -32,13 +33,24 @@ class BooksApp extends Component {
       .concat([book])})
     }
     )
-  }
+}
 
-  handleChange = (event) => {
-  	this.setState({ query: event.target.value })
-  }
-
-  render() {
+handleChange = (query) => {
+    this.setState({ query: query})
+    this.getSearchResults(query)
+}
+    
+getSearchResults = (query) => {
+	if (query) {
+	BooksAPI.search(query).then((searchedBooks) => {
+		this.setState({ searchedBooks: searchedBooks})
+	})
+	} else {
+		this.setState({ searchedBooks: []})
+	} 
+}
+  
+render() {
    // console.log(this.state.books)
     return (
       <div className="app">
@@ -53,6 +65,8 @@ class BooksApp extends Component {
         <Route path="/search" render={() => (
         	<Search
            		searchQuery = {this.state.query}
+           		searchedBooks = {this.state.searchedBooks}
+           		books = {this.state.books} 
         		onChangeSearch = {this.handleChange}
          	/>
 
