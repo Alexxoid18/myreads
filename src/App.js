@@ -9,7 +9,7 @@ import Main from './Main'
 class BooksApp extends Component {
 
   state = {
-    showSearchPage: true,
+    showSearchPage: false,
     books: [],
     query: {}
 
@@ -34,34 +34,37 @@ class BooksApp extends Component {
     )
   }
 
-  handleChange = (event) => {
-  	this.setState({query: event.target.value})
+  updateQuery = (event) => {
+  	this.setState({ query: event.target.value })
   }
 
-   
-
- 
 /*
-    handleChange = (event) => {
-      this.setState({shelf: event.target.value})
-    }
-*/
-   
- 
+  updateQuery = (query) => {
+  	this.setState({ query: query})
+  }
+ */ 
 
   render() {
    // console.log(this.state.books)
     return (
       <div className="app">
+	    {this.state.showSearchPage === false && (
         <Main  
           books = {this.state.books} 
           onChangeShelf = {this.changeShelf}
-
+          onNavigate = {() => {
+        	this.setState({ showSearchPage: true })
+          }}
         />
+        )}
+        
+        {this.state.showSearchPage === true && (
         <Search
+        	
         	searchQuery = {this.state.query}
-        	onChange={this.handleChange}
+        	updateQuery={this.updateQuery}
         />
+        )}
       </div>
            
     )
