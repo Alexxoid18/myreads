@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Route } from 'react-router-dom'
 import * as BooksAPI from './BooksAPI'
 import './App.css'
 import Book from './Book'
@@ -9,7 +10,6 @@ import Main from './Main'
 class BooksApp extends Component {
 
   state = {
-    showSearchPage: false,
     books: [],
     query: {}
 
@@ -34,37 +34,30 @@ class BooksApp extends Component {
     )
   }
 
-  updateQuery = (event) => {
+  handleChange = (event) => {
   	this.setState({ query: event.target.value })
   }
-
-/*
-  updateQuery = (query) => {
-  	this.setState({ query: query})
-  }
- */ 
 
   render() {
    // console.log(this.state.books)
     return (
       <div className="app">
-	    {this.state.showSearchPage === false && (
-        <Main  
-          books = {this.state.books} 
-          onChangeShelf = {this.changeShelf}
-          onNavigate = {() => {
-        	this.setState({ showSearchPage: true })
-          }}
-        />
-        )}
+	    <Route exact path="/" render={() => (
+	    	<Main  
+				books = {this.state.books} 
+         		onChangeShelf = {this.changeShelf}
+            />
+	    )}/>
         
-        {this.state.showSearchPage === true && (
-        <Search
-        	
-        	searchQuery = {this.state.query}
-        	updateQuery={this.updateQuery}
-        />
-        )}
+        
+        <Route path="/search" render={() => (
+        	<Search
+           		searchQuery = {this.state.query}
+        		onChangeSearch = {this.handleChange}
+         	/>
+
+        )}/>       
+       
       </div>
            
     )
