@@ -2,9 +2,8 @@ import React, { Component } from 'react'
 
 class Book extends Component {
 
-
-  	
-	render() {
+  	render() {
+       
         // Correct display of books without thumbnails in search
         let hasThumbnail = this.props.book.imageLinks;
         if (hasThumbnail) {
@@ -13,6 +12,7 @@ class Book extends Component {
         else {
            hasThumbnail = '' ;
         }
+
 		return (
 			<div className="book">
             	<div className="book-top">
@@ -35,7 +35,6 @@ class Book extends Component {
             	</div>
             </div>
 		)
-
 	}
 }
 

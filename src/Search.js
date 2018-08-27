@@ -5,14 +5,15 @@ import Book from './Book'
 import * as BooksAPI from './BooksAPI'
 
 class Search extends Component {
-	render() {
+	
+  render() {
     
     const { searchQuery } = this.props
    
     if (searchQuery) {
       const match = new RegExp(escapeRegExp(searchQuery), 'i')
     }
-
+   
 		return (
 			<div className="search-books">
          
@@ -49,7 +50,6 @@ class Search extends Component {
             </div>
           </div>
 		)
-
 	}
 }
 

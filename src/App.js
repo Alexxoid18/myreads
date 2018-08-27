@@ -14,10 +14,8 @@ class BooksApp extends Component {
     books: [],
     query: '',
     searchedBooks: []
-}
+  }
     
-
-
 componentDidMount() {
     BooksAPI.getAll().then((books) => {
       this.setState({ books: books })
