@@ -6,14 +6,13 @@ import * as BooksAPI from './BooksAPI'
 
 class Search extends Component {
 	render() {
+    
+    const { searchQuery } = this.props
    
-    if (this.props.searchQuery) {
-      const match = new RegExp(escapeRegExp(this.props.searchQuery), 'i')
-     
+    if (searchQuery) {
+      const match = new RegExp(escapeRegExp(searchQuery), 'i')
     }
-    else {
 
-    }
 		return (
 			<div className="search-books">
          
@@ -30,7 +29,7 @@ class Search extends Component {
               <input 
                 type="text" 
                 placeholder="Search by title or author" 
-                value = {this.props.searchQuery}
+                value = {searchQuery}
                 onChange = {(event) => this.props.onChangeSearch(event.target.value)}
               />
 
