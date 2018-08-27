@@ -42,6 +42,7 @@ class Search extends Component {
                   <li key={searchedBook.id}>
                   <Book
                     book={searchedBook}
+                    onChangeShelf={this.props.onChangeShelf}
                   />  
                   </li>
                 ))}

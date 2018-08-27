@@ -68,6 +68,8 @@ render() {
            		searchedBooks = {this.state.searchedBooks}
            		books = {this.state.books} 
         		onChangeSearch = {this.handleChange}
+        		onChangeShelf = {this.changeShelf}
+
          	/>
 
         )}/>       
