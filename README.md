@@ -3,7 +3,7 @@
 This is the assessment project for Udacity's React Fundamentals course. This project is used for categorizing books. You have 4 shelves ("Currently Reading", "Want to Read", "Read" and "None") and can choose a proper shelve for your book using control. Book search is also available. A button for the transition to book search page is situated in the lower right corner of the main page.
 
 
-## How to lunch this project
+## How to launch this project
 
 The application was created with create-react-app and requires only *npm install* and *npm start* to get it installed and launched.
 
