@@ -1,24 +1,16 @@
-import React, { Component } from 'react'
+import React from 'react'
 
-class Book extends Component {
+function Book (props) {
 
-  	render() {
-       
-        // Correct display of books without thumbnails in search
-        let hasThumbnail = this.props.book.imageLinks;
-        if (hasThumbnail) {
-            hasThumbnail = this.props.book.imageLinks.thumbnail;
-        }
-        else {
-           hasThumbnail = '' ;
-        }
+  	// Correct display of books without thumbnails in search
+    const thumbnail = props.book.imageLinks ?  props.book.imageLinks.thumbnail : ''
 
 		return (
 			<div className="book">
             	<div className="book-top">
-                    <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${hasThumbnail})` }}></div>
+                    <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${thumbnail})` }}></div>
                         <div className="book-shelf-changer">
-                            <select  onChange={(e) => this.props.onChangeShelf(this.props.book, e.target.value)} value={this.props.book.shelf ? this.props.book.shelf : 'none'} >
+                            <select  onChange={(e) => props.onChangeShelf(props.book, e.target.value)} value={props.book.shelf ? props.book.shelf : 'none'} >
                                 <option value="move" disabled>Move to...</option>
                                 <option value="currentlyReading">Currently Reading</option>
                                 <option value="wantToRead">Want to Read</option>
@@ -28,14 +20,13 @@ class Book extends Component {
                         </div>
                     </div>
             	<div className="book-title">
-            		{this.props.book.title}
+            		{props.book.title}
             	</div>
             	<div className="book-authors">
-            		{this.props.book.authors}
+            		{`${props.book.authors}`}
             	</div>
-            </div>
+      </div>
 		)
-	}
 }
 
 export default Book

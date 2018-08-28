@@ -18,9 +18,8 @@ class BooksApp extends Component {
     
 componentDidMount() {
     BooksAPI.getAll().then((books) => {
-      this.setState({ books: books })
+      this.setState({ books })
     })
-
 }
   
 changeShelf = (book, shelf) => {
@@ -34,21 +33,21 @@ changeShelf = (book, shelf) => {
 }
 
 handleChange = (query) => {
-    this.setState({ query: query})
-    this.getSearchResults(query)
+  this.setState({ query })
+  this.getSearchResults(query)
 }
     
 getSearchResults = (query) => {
 	if (query) {
-	BooksAPI.search(query).then((searchedBooks) => {
-		if (searchedBooks.error) {
-			this.setState({ searchedBooks: []})
-		} else {
-			this.setState({ searchedBooks: searchedBooks})
-		}
-	})
+		BooksAPI.search(query).then((searchedBooks) => {
+			if (searchedBooks.error) {
+				this.setState({ searchedBooks: [] })
+			} else {
+			this.setState({ searchedBooks })
+			}
+		})
 	} else {
-		this.setState({ searchedBooks: []})
+		this.setState({ searchedBooks: [] })
 	} 
 }
   
@@ -59,16 +58,16 @@ render() {
 	    <Route exact path="/" render={() => (
 	    	<Main  
 				books = {this.state.books} 
-         		onChangeShelf = {this.changeShelf}
-            />
+         	onChangeShelf = {this.changeShelf}
+        />
 	    )}/>
         
         
         <Route path="/search" render={() => (
         	<Search
-           		searchQuery = {this.state.query}
-           		searchedBooks = {this.state.searchedBooks}
-           		books = {this.state.books} 
+           	searchQuery = {this.state.query}
+           	searchedBooks = {this.state.searchedBooks}
+           	books = {this.state.books} 
         		onChangeSearch = {this.handleChange}
         		onChangeShelf = {this.changeShelf}
 
